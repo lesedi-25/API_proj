@@ -58,6 +58,6 @@ CI/CD evidence: Insert a screenshot of the successful GitHub Actions workflow he
 
 7. Demonstration Video
 
-YouTube demonstration: []
+YouTube demonstration: [https://youtu.be/5DOIIFe3xcE?si=SS5vSv9chhrI_VHD&utm_source=chatgpt.com]
 
-The demonstration should explain the project planning documents, database design, endpoint choices and relevant implementation or testing steps.
+The demonstration should explain the project planning documents, database design, endpoint choices and relevant implementation.
