@@ -12,6 +12,7 @@
     <Folder Include="Filters\" />
     <Folder Include="wwwroot\images\events\" />
     <Folder Include="wwwroot\images\profiles\" />
+    <Folder Include="wwwroot\screenshots\" />
   </ItemGroup>
 
 </Project>
