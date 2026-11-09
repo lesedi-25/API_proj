@@ -61,3 +61,37 @@ CI/CD evidence: Insert a screenshot of the successful GitHub Actions workflow he
 YouTube demonstration: [https://youtu.be/5DOIIFe3xcE?si=SS5vSv9chhrI_VHD&utm_source=chatgpt.com]
 
 The demonstration should explain the project planning documents, database design, endpoint choices and relevant implementation.
+## 10. Application Screenshots
+
+### Login
+![Login](RaceDay.Web/wwwroot/screenshots/Login.png)
+
+### Participant Dashboard
+![Participant Dashboard](RaceDay.Web/wwwroot/screenshots/ParticipantDashboard.png)
+
+### Organiser Dashboard
+![Organiser Dashboard](RaceDay.Web/wwwroot/screenshots/OrganiserDashboard.png)
+
+### Event Details
+![Event Details](RaceDay.Web/wwwroot/screenshots/EventDetails.png)
+
+### My Enrolments
+![My Enrolments](RaceDay.Web/wwwroot/screenshots/MyEnrolments.png)
+
+### Event Management
+![Event Management](RaceDay.Web/wwwroot/screenshots/EventManagement.png)
+
+### Category Management
+![Category Management](RaceDay.Web/wwwroot/screenshots/CategoryManagement.png)
+
+### Enrolment Management
+![Enrolment Management](RaceDay.Web/wwwroot/screenshots/EnrolmentManagement.png)
+
+### Results Management
+![Results Management](RaceDay.Web/wwwroot/screenshots/ResultsManagement.png)
+
+### Participant Profile
+![Participant Profile](RaceDay.Web/wwwroot/screenshots/ParticipantProfile.png)
+
+### Results History
+![Results History](RaceDay.Web/wwwroot/screenshots/ResultsHistory.png)
