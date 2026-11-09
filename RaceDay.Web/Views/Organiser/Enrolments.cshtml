@@ -1,0 +1,98 @@
+﻿@model List<RaceDay.Web.ViewModels.OrganiserEnrolmentViewModel>
+
+@{
+    ViewData["Title"] = "Manage Enrolments";
+}
+
+<div class="container mt-4">
+
+    <h2>Participant Enrolments</h2>
+    <p class="text-muted">
+        View participants registered for your events.
+    </p>
+
+    @if (ViewBag.Error != null)
+    {
+        <div class="alert alert-danger">
+            @ViewBag.Error
+        </div>
+    }
+
+    @if (Model == null || !Model.Any())
+    {
+        <div class="alert alert-info">
+            No participants have enrolled in your events yet.
+        </div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+
+                <thead class="table-success">
+                    <tr>
+                        <th>Enrolment ID</th>
+                        <th>Participant</th>
+                        <th>Email</th>
+                        <th>Event</th>
+                        <th>Category</th>
+                        <th>Enrolment Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var enrolment in Model)
+                    {
+                        <tr>
+                            <td>@enrolment.EnrolmentId</td>
+                            <td>@enrolment.ParticipantName</td>
+                            <td>@enrolment.ParticipantEmail</td>
+                            <td>@enrolment.EventName</td>
+                            <td>@enrolment.CategoryName</td>
+                            <td>@enrolment.EnrolmentDate.ToString("dd MMM yyyy")</td>
+                            <td>
+                            <td>
+                                <span class="badge @(enrolment.Status == "Active" ? "bg-success" :
+                                                               enrolment.Status == "Completed" ? "bg-primary" :
+                                                               "bg-danger")">
+                            @enrolment.Status
+                        </span>
+
+                                <form asp-controller="Organiser"
+                                      asp-action="UpdateEnrolmentStatus"
+                                      method="post"
+                                      class="mt-2">
+
+                                    @Html.AntiForgeryToken()
+
+                                    <input type="hidden"
+                                           name="enrolmentId"
+                                           value="@enrolment.EnrolmentId" />
+
+                                    <select name="status" class="form-select form-select-sm mb-2">
+                                        <option value="Active" selected="@(enrolment.Status == "Active")">Active</option>
+                                        <option value="Completed" selected="@(enrolment.Status == "Completed")">Completed</option>
+                                        <option value="Cancelled" selected="@(enrolment.Status == "Cancelled")">Cancelled</option>
+                                    </select>
+
+                                    <button type="submit" class="btn btn-sm btn-primary">
+                                        Update Status
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+        </div>
+    }
+
+    <a asp-controller="Organiser"
+       asp-action="Index"
+       class="btn btn-secondary mt-3">
+        Back to Dashboard
+    </a>
+
+</div>

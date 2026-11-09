@@ -1,0 +1,116 @@
+﻿@model RaceDay.Web.ViewModels.ProfileViewModel
+
+@{
+    ViewData["Title"] = "My Profile";
+}
+
+<div class="container mt-5">
+
+    <h1>My Profile</h1>
+    <p class="text-muted">View and update your RaceDay account information.</p>
+
+    @if (ViewBag.Error != null)
+    {
+        <div class="alert alert-danger">@ViewBag.Error</div>
+    }
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success">@TempData["Success"]</div>
+    }
+
+    <div class="card shadow mt-4">
+        <div class="card-body">
+
+            <form asp-action="Profile"
+                  method="post"
+                  enctype="multipart/form-data">
+                @Html.AntiForgeryToken()
+
+                <input type="hidden" asp-for="UserId" />
+                @if (!string.IsNullOrEmpty(Model.ProfilePicturePath))
+                {
+                    <div class="mb-3">
+                        <label class="form-label">Current Profile Picture</label>
+                        <br />
+                        <img src="@Model.ProfilePicturePath"
+                             alt="Profile Picture"
+                             style="width:150px; height:150px; object-fit:cover;"
+                             class="rounded-circle" />
+                    </div>
+                }
+
+                <div class="mb-3">
+                    <label asp-for="ProfilePicture" class="form-label">
+                        Upload Profile Picture
+                    </label>
+
+                    <input asp-for="ProfilePicture"
+                           type="file"
+                           class="form-control"
+                           accept=".jpg,.jpeg,.png,.gif" />
+
+                    <span asp-validation-for="ProfilePicture"
+                          class="text-danger"></span>
+                </div>
+                <div asp-validation-summary="ModelOnly"
+                     class="text-danger"></div>
+
+                <div class="mb-3">
+                    <label asp-for="FirstName" class="form-label">First Name</label>
+                    <input asp-for="FirstName" class="form-control" />
+                    <span asp-validation-for="FirstName"
+                          class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="LastName" class="form-label">Last Name</label>
+                    <input asp-for="LastName" class="form-control" />
+                    <span asp-validation-for="LastName"
+                          class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Email" class="form-label">Email Address</label>
+                    <input asp-for="Email" class="form-control" readonly />
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="PhoneNumber" class="form-label">Phone Number</label>
+                    <input asp-for="PhoneNumber" class="form-control" />
+                    <span asp-validation-for="PhoneNumber"
+                          class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="DateOfBirth" class="form-label">Date of Birth</label>
+                    <input asp-for="DateOfBirth"
+                           type="date"
+                           class="form-control" />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Account Role</label>
+                    <input value="@Model.Role" class="form-control" readonly />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Member Since</label>
+                    <input value="@Model.CreatedAt.ToString("dd MMMM yyyy")"
+                           class="form-control" readonly />
+                </div>
+
+                <button type="submit" class="btn btn-success">
+                    Save Changes
+                </button>
+
+                <a asp-action="Index" class="btn btn-secondary ms-2">
+                    Back to Dashboard
+                </a>
+
+            </form>
+
+        </div>
+    </div>
+
+</div>

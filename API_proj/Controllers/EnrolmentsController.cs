@@ -1,5 +1,4 @@
-﻿
-using API_proj.Data;
+﻿using API_proj.Data;
 using API_proj.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;

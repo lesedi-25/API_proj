@@ -1,0 +1,128 @@
+﻿@model RaceDay.Web.ViewModels.EditEventViewModel
+
+@{
+    ViewData["Title"] = "Edit Event";
+}
+
+<div class="container mt-4">
+
+    <h2>Edit RaceDay Event</h2>
+    <p class="text-muted">Update the details of your event.</p>
+
+    @if (ViewBag.Error != null)
+    {
+        <div class="alert alert-danger">@ViewBag.Error</div>
+    }
+
+    <form asp-controller="Organiser"
+          asp-action="Edit"
+          method="post"
+          enctype="multipart/form-data">
+
+        @Html.AntiForgeryToken()
+
+        <input type="hidden" asp-for="EventId" />
+
+        <div asp-validation-summary="ModelOnly"
+             class="text-danger mb-3"></div>
+
+        <div class="mb-3">
+            <label asp-for="EventName" class="form-label">Event Name</label>
+            <input asp-for="EventName" class="form-control" />
+            <span asp-validation-for="EventName" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="EventDescription" class="form-label">Description</label>
+            <textarea asp-for="EventDescription"
+                      class="form-control" rows="3"></textarea>
+            <span asp-validation-for="EventDescription"
+                  class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="EventBanner" class="form-label">
+                Replace Event Banner
+            </label>
+
+            @if (!string.IsNullOrEmpty(Model.EventBannerPath))
+            {
+                <div class="mb-2">
+                    <img src="@Model.EventBannerPath"
+                         alt="Current Event Banner"
+                         style="max-width:350px; width:100%; height:160px; object-fit:cover;"
+                         class="rounded" />
+                </div>
+            }
+
+            <input asp-for="EventBanner"
+                   type="file"
+                   class="form-control"
+                   accept=".jpg,.jpeg,.png,.gif" />
+
+            <span asp-validation-for="EventBanner"
+                  class="text-danger"></span>
+
+            <small class="text-muted">
+                Select a new image to replace the current banner. Maximum 5 MB.
+            </small>
+        </div>
+        <div class="mb-3">
+            <label asp-for="EventDate" class="form-label">Event Date</label>
+            <input asp-for="EventDate" type="date" class="form-control" />
+            <span asp-validation-for="EventDate" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="RegistrationDeadline" class="form-label">
+                Registration Deadline
+            </label>
+            <input asp-for="RegistrationDeadline"
+                   type="date" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Location" class="form-label">Location</label>
+            <input asp-for="Location" class="form-control" />
+            <span asp-validation-for="Location" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="EventType" class="form-label">Event Type</label>
+            <select asp-for="EventType" class="form-select">
+                <option value="Run">Running</option>
+                <option value="Walk">Walking</option>
+                <option value="Cycle">Cycling</option>
+            </select>
+            <span asp-validation-for="EventType" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="DistanceKm" class="form-label">
+                Distance (km)
+            </label>
+            <input asp-for="DistanceKm" type="number"
+                   step="0.1" class="form-control" />
+            <span asp-validation-for="DistanceKm"
+                  class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="EntryFee" class="form-label">Entry Fee (R)</label>
+            <input asp-for="EntryFee" type="number"
+                   step="0.01" class="form-control" />
+            <span asp-validation-for="EntryFee"
+                  class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-success">
+            Save Changes
+        </button>
+
+        <a asp-controller="Organiser"
+           asp-action="Index"
+           class="btn btn-secondary ms-2">
+            Cancel
+        </a>
+
+    </form>
+</div>

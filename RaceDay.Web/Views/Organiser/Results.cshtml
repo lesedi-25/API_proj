@@ -1,0 +1,116 @@
+﻿@model List<RaceDay.Web.ViewModels.OrganiserResultViewModel>
+
+@{
+    ViewData["Title"] = "Manage Results";
+}
+
+<div class="container mt-4">
+
+    <h2>Event Results</h2>
+    <a asp-controller="Organiser"
+       asp-action="CreateResult"
+       class="btn btn-success mb-3">
+        <i class="bi bi-plus-circle"></i> Record New Result
+    </a>
+    <p class="text-muted">
+        View finishing times, positions and results for your events.
+    </p>
+
+    @if (ViewBag.Error != null)
+    {
+        <div class="alert alert-danger">
+            @ViewBag.Error
+        </div>
+    }
+
+    @if (Model == null || !Model.Any())
+    {
+        <div class="alert alert-info">
+            No results have been recorded for your events yet.
+        </div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+
+                <thead class="table-success">
+                    <tr>
+                        <th>Result ID</th>
+                        <th>Participant</th>
+                        <th>Event</th>
+                        <th>Finish Time</th>
+                        <th>Position</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var result in Model)
+                    {
+                        <tr>
+                            <td>@result.ResultId</td>
+                            <td>@result.ParticipantName</td>
+                            <td>@result.EventName</td>
+
+                            <td>
+                                @(result.FinishTime?.ToString(@"hh\:mm\:ss") ?? "Not recorded")
+                            </td>
+
+                            <td>
+                                @(result.Position?.ToString() ?? "Not recorded")
+                            </td>
+
+                            <td>
+                                @if (result.Status == "Finished")
+                                {
+                                    <span class="badge bg-success">Finished</span>
+                                }
+                                else if (result.Status == "DidNotFinish")
+                                {
+                                    <span class="badge bg-warning text-dark">Did Not Finish</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-danger">Disqualified</span>
+                                }
+                            </td>
+                            <td>
+                                <a asp-controller="Organiser"
+                                   asp-action="EditResult"
+                                   asp-route-id="@result.ResultId"
+                                   class="btn btn-sm btn-warning mb-1">
+                                    Edit
+                                </a>
+
+                                <form asp-controller="Organiser"
+                                      asp-action="DeleteResult"
+                                      asp-route-id="@result.ResultId"
+                                      method="post"
+                                      style="display:inline;">
+
+                                    @Html.AntiForgeryToken()
+
+                                    <button type="submit"
+                                            class="btn btn-sm btn-danger"
+                                            onclick="return confirm('Are you sure you want to delete this result?');">
+                                        Delete
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+        </div>
+    }
+
+    <a asp-controller="Organiser"
+       asp-action="Index"
+       class="btn btn-secondary mt-3">
+        Back to Dashboard
+    </a>
+
+</div>

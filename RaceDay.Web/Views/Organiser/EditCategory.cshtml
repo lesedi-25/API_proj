@@ -1,0 +1,74 @@
+﻿@model RaceDay.Web.ViewModels.CreateCategoryViewModel
+
+@{
+    ViewData["Title"] = "Edit Category";
+}
+
+<div class="container mt-4">
+
+    <h2>Edit Category</h2>
+    <p class="text-muted">Update your category details.</p>
+
+    <form asp-controller="Organiser"
+          asp-action="EditCategory"
+          method="post">
+
+        @Html.AntiForgeryToken()
+
+        <input type="hidden"
+               name="categoryId"
+               value="@ViewBag.CategoryId" />
+
+        <div class="mb-3">
+            <label asp-for="EventId" class="form-label">Event ID</label>
+            <input asp-for="EventId" class="form-control" readonly />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="CategoryName" class="form-label">
+                Category Name
+            </label>
+            <input asp-for="CategoryName" class="form-control" />
+            <span asp-validation-for="CategoryName"
+                  class="text-danger"></span>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label asp-for="MinimumAge" class="form-label">
+                    Minimum Age
+                </label>
+                <input asp-for="MinimumAge" type="number"
+                       min="0" max="120" class="form-control" />
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label asp-for="MaximumAge" class="form-label">
+                    Maximum Age
+                </label>
+                <input asp-for="MaximumAge" type="number"
+                       min="0" max="120" class="form-control" />
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Description" class="form-label">
+                Description
+            </label>
+            <textarea asp-for="Description"
+                      class="form-control" rows="3"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-success">
+            Save Changes
+        </button>
+
+        <a asp-controller="Organiser"
+           asp-action="Categories"
+           class="btn btn-secondary ms-2">
+            Cancel
+        </a>
+
+    </form>
+
+</div>

@@ -5,9 +5,25 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddHttpClient();
 
+// Session storage
 builder.Services.AddDistributedMemoryCache();
 
-builder.Services.AddSession();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+
+// Allows controllers to access the current session
+builder.Services.AddHttpContextAccessor();
+
+builder.Services.AddHttpClient<RaceDay.Web.Services.ApiService>(client =>
+{
+    client.BaseAddress = new Uri(
+        builder.Configuration["ApiSettings:BaseUrl"]!);
+});
 
 var app = builder.Build();
 
