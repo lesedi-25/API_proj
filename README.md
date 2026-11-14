@@ -58,7 +58,7 @@ CI/CD evidence: Insert a screenshot of the successful GitHub Actions workflow he
 
 7. Demonstration Video
 
-YouTube demonstration: [https://youtu.be/5DOIIFe3xcE?si=SS5vSv9chhrI_VHD&utm_source=chatgpt.com]
+YouTube demonstration: [https://youtu.be/5DOIIFe3xcE?si=SS5vSv9chhrI_VHD&utm]
 
 The demonstration should explain the project planning documents, database design, endpoint choices and relevant implementation.
 ## 10. Application Screenshots
@@ -95,3 +95,5 @@ The demonstration should explain the project planning documents, database design
 
 ### Results History
 ![Results History](RaceDay.Web/wwwroot/screenshots/ResultsHistory.png)
+
+video for part 3 https://youtu.be/MDvICUALcpY?si=GSBwiYHrjm-kPg0H
